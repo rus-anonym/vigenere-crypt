@@ -1,9 +1,11 @@
 import { Button } from "@consta/uikit/Button";
+import { Informer } from "@consta/uikit/Informer";
 import { Select } from "@consta/uikit/Select";
 import { Text } from "@consta/uikit/Text";
 import { TextField } from "@consta/uikit/TextField";
 import { useMemo, useState } from "react";
 import { useScreenDetector, VigenereCipher } from "../TS";
+import { copyTextToClipboard } from "../TS/clipboard";
 import DeveloperModal from "./Developer";
 
 const Main = () => {
@@ -16,6 +18,7 @@ const Main = () => {
   const [password, setPassword] = useState("");
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [result, setResult] = useState("");
+  const [isCopyProcess, setIsCopyProcess] = useState(false);
 
   const cryptor = useMemo(() => new VigenereCipher(), []);
 
@@ -55,6 +58,7 @@ const Main = () => {
       >
         Шифр Виженера
       </Text>
+      <div style={{ paddingTop: "10px" }} />
       <Select
         required
         placeholder="Выберите значение"
@@ -108,14 +112,30 @@ const Main = () => {
         />
       </div>
       <div style={{ paddingTop: "30px" }} />
-      <TextField
-        type="textarea"
-        view="default"
-        disabled
-        caption="Результат"
-        value={result}
+      <Informer
+        status="system"
+        view="outline"
+        label={result}
+        style={{ display: result === "" ? "none" : "" }}
       />
-      <DeveloperModal />
+      <div style={{ padding: "5px" }} />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button
+          label="Скопировать"
+          size="m"
+          form="round"
+          disabled={result === ""}
+          loading={isCopyProcess}
+          onClick={() => {
+            setIsCopyProcess(true);
+            copyTextToClipboard(result).then(() => {
+              setIsCopyProcess(false);
+            });
+          }}
+          style={{ display: result === "" ? "none" : "" }}
+        />
+        <DeveloperModal />
+      </div>
     </div>
   );
 };

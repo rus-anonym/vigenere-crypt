@@ -12,9 +12,9 @@ const DeveloperModal = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
-    <div style={{ display: "flex", justifyContent: "end" }}>
+    <div>
       <Button
-        size="s"
+        size="m"
         view="ghost"
         label="О программе"
         width="default"
