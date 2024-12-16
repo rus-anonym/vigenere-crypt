@@ -4,6 +4,7 @@ import { Text } from "@consta/uikit/Text";
 import { TextField } from "@consta/uikit/TextField";
 import { useMemo, useState } from "react";
 import { useScreenDetector, VigenereCipher } from "../TS";
+import DeveloperModal from "./Developer";
 
 const Main = () => {
   const isDesktop = useScreenDetector();
@@ -114,6 +115,7 @@ const Main = () => {
         caption="Результат"
         value={result}
       />
+      <DeveloperModal />
     </div>
   );
 };
