@@ -33,7 +33,9 @@ class VigenereCipher {
       const charCode = this._datasets[dataset].indexOf(
         plainText[i].toLowerCase()
       );
-      if (charCode === -1) continue;
+      if (charCode === -1) {
+        continue;
+      }
       const keyCharCode = this._datasets[dataset].indexOf(
         key[index % key.length].toLowerCase()
       );
@@ -57,7 +59,9 @@ class VigenereCipher {
       const charCode = this._datasets[dataset].indexOf(
         cipherText[i].toLowerCase()
       );
-      if (charCode === -1) continue;
+      if (charCode === -1) {
+        continue;
+      }
       const keyCharCode = this._datasets[dataset].indexOf(
         key[index % key.length].toLowerCase()
       );
